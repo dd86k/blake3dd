@@ -1,0 +1,12 @@
+name "benchmark"
+description "blake3dd throughput benchmark"
+targetType "executable"
+targetPath "../bin"
+dependency "blake3dd" path=".."
+
+buildType "release-native" {
+	buildOptions "releaseMode" "optimize" "inline" "noBoundsCheck"
+	dflags "-mcpu=native" platform="ldc"
+	dflags "-march=native" platform="gdc"
+	dflags "-mcpu=native" platform="dmd"
+}

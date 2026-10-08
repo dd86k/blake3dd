@@ -1,0 +1,6 @@
+name "blake3dd"
+description "BLAKE3 implementation"
+authors "dd86k"
+copyright "Copyright © 2026, dd86k"
+license "BSL-1.0"
+subPackage "benchmark"
