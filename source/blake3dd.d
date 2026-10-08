@@ -219,7 +219,8 @@ private:
         size_t count = input.length / ChunkLength;
 
         size_t parts = threads;
-        if (parts != 1)
+        size_t maxParts = count / MinChunksPerThread;
+        if (parts != 1 && maxParts > 1)
         {
             if (parts == 0)
             {
@@ -228,7 +229,6 @@ private:
                 catch (Exception)
                     parts = 1;
             }
-            size_t maxParts = count / MinChunksPerThread;
             if (parts > maxParts)
                 parts = maxParts;
         }
@@ -341,12 +341,10 @@ struct Piece
     uint[8] cv;
 }
 
-/// Hashes whole chunks as aligned power-of-two subtrees, so workers do
-
-size_t poolSize() @trusted
+size_t poolSize()
 {
     import std.parallelism : taskPool;
-    return taskPool.size + 1;
+    return taskPool.size + 1; // since default is totalCPUs - 1
 }
 
 void hashPiecesParallel(scope const(ubyte)[] input, scope Piece[] pieces,
