@@ -808,4 +808,4 @@ unittest
     assert(toHexString!(LetterCase.lower)(b3t.finish()) == vectors[$-1].hash);
 }
 
-version (unittest) private enum MaxBatchTest = 16 * 1024;
+version (unittest) private enum MaxBatchTest = BLAKE3_256.MaxBatch;
