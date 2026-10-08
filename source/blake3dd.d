@@ -8,7 +8,7 @@ private import std.digest;
 private import core.bitop : ror;
 
 /// blake3dd library version string.
-public enum BLAKE3DD_VERSION_STRING = "0.1.0";
+public enum BLAKE3DD_VERSION_STRING = "1.0.0";
 
 /// BLAKE3 hasher, conforming to the Digest API.
 ///
