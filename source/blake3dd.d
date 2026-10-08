@@ -821,3 +821,19 @@ unittest
 }
 
 version (unittest) private enum MaxBatchTest = BLAKE3_256.MaxBatch;
+
+// Over 256 parts per batch, where the piece count must be capped to fit
+// MaxPieces. Opt-in: dub test -b unittest-wide
+version (BLAKE3DD_TEST_WIDE)
+unittest
+{
+    ubyte[] input = testInput(MaxBatchTest * 1024 + 4567);
+
+    BLAKE3_256 b3;
+    b3.put(input);
+    ubyte[32] expected = b3.finish();
+
+    b3.threads = 1000;
+    b3.put(input);
+    assert(b3.finish() == expected);
+}
