@@ -1,4 +1,4 @@
-/// Computes BLAKE3 hashes of arbitary data.
+/// Computes BLAKE3 hashes of arbitrary data.
 /// Reference: $(LINK2 https://github.com/BLAKE3-team/BLAKE3, BLAKE3)
 /// License: $(LINK2 https://www.boost.org/LICENSE_1_0.txt, Boost License 1.0)
 /// Authors: $(LINK2 https://github.com/dd86k, dd86k)
@@ -282,7 +282,7 @@ alias BLAKE3_256 = BLAKE3!(256);
 /// Alias for BLAKE3-512, an extended output of BLAKE3-256.
 alias BLAKE3_512 = BLAKE3!(512);
 
-/// Convience alias using the BLAKE3 implementation.
+/// Convenience alias using the BLAKE3 implementation.
 auto blake3_256_Of(T...)(T data)
 {
     return digest!(BLAKE3_256, T)(data);
