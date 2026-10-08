@@ -778,6 +778,18 @@ unittest
     assert(toHexString!(LetterCase.lower)(extended[0 .. 32]) == vectors[$-1].keyed);
 }
 
+// HMAC, reference built from RFC 2104 over b3sum 1.8.1
+unittest
+{
+    import std.digest.hmac : hmac;
+    import std.string : representation;
+
+    ubyte[32] mac = "The quick brown fox jumps over the lazy dog".representation
+        .hmac!BLAKE3_256("key".representation);
+    assert(toHexString!(LetterCase.lower)(mac) ==
+        "3742da5c89b7c0c376c0af2f211bd59f97aeaa282f21dccb0c0308b7703ac959");
+}
+
 // Threaded and streamed inputs must match the single-threaded result
 unittest
 {
